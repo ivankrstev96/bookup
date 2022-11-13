@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bookup
+    username: postgres
+    password: 123123
+    driverClassName: org.postgresql.Driver
+  flyway:
+    url: jdbc:postgresql://localhost:5432/bookup
+    user: postgres
+    password: 123123
+    baseline-on-migrate: true
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 6MB
+      enabled: true
+
+security:
+  jwt:
+    secret: development_secret_key
