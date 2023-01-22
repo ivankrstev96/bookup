@@ -1,19 +1,14 @@
 CREATE TABLE public."user"
 (
-    id bigint NOT NULL,
+    id bigserial NOT NULL,
     username character varying(30) NOT NULL,
+    password character varying NOT NULL,
+    role character varying NOT NULL,
     email character varying NOT NULL,
-    password character varying,
-    PRIMARY KEY (id)
+    CONSTRAINT user_pkey PRIMARY KEY (id),
+    CONSTRAINT username_unique UNIQUE (username),
+    CONSTRAINT email_unique UNIQUE (email)
 );
 
 ALTER TABLE IF EXISTS public."user"
     OWNER to postgres;
-
-CREATE SEQUENCE public.user_seq
-    INCREMENT 50
-    START 1
-    OWNED BY "user".id;
-
-ALTER SEQUENCE public.user_seq
-    OWNER TO postgres;
