@@ -5,7 +5,7 @@ CREATE TABLE public.file_resource
     bytes bytea NOT NULL,
     type character varying NOT NULL,
     size bigint NOT NULL,
-    created_at date NOT NULL,
+    created_at timestamp without time zone NOT NULL,
     CONSTRAINT file_resource_pkey PRIMARY KEY (id)
 );
 

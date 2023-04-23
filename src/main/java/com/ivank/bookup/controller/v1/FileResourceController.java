@@ -1,30 +1,31 @@
 package com.ivank.bookup.controller.v1;
 
-import com.ivank.bookup.dto.UserDto;
-import com.ivank.bookup.dto.UserUpsertDto;
-import com.ivank.bookup.service.UserService;
+import com.ivank.bookup.dto.FileResourceDto;
+import com.ivank.bookup.service.FileResourceService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.validation.Valid;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("api/v1/file-resources")
 public class FileResourceController {
 
-    private final UserService service;
+    private final FileResourceService service;
 
-    public FileResourceController(UserService service) {
+    public FileResourceController(FileResourceService service) {
         this.service = service;
     }
 
-    @PostMapping(value = "/register")
-    public ResponseEntity<UserDto> register(@RequestBody @Valid UserUpsertDto userUpsertDto) {
-        UserDto userDto = this.service.register(userUpsertDto);
-        return ResponseEntity.ok(userDto);
+    @GetMapping("/{id}")
+    public ResponseEntity<FileResourceDto> findById(@PathVariable Long id) {
+        FileResourceDto fileResourceDto = this.service.find(id);
+        return ResponseEntity.ok(fileResourceDto);
     }
 
+    @PostMapping
+    public ResponseEntity<FileResourceDto> upload(@RequestParam("file") MultipartFile file) {
+        FileResourceDto fileResourceDto = this.service.upload(file);
+        return ResponseEntity.ok(fileResourceDto);
+    }
 }
