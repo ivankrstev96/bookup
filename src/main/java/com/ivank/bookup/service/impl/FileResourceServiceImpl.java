@@ -44,9 +44,15 @@ public class FileResourceServiceImpl implements FileResourceService {
 
     @Override
     public FileResourceDto find(Long id) {
+        FileResource fileResource = getOneOrThrowException(id);
+        return mapper.toDto(fileResource);
+    }
+
+    @Override
+    public FileResource getOneOrThrowException(Long id) {
         FileResource fileResource = repository
                 .findById(id)
                 .orElseThrow(() -> new RuntimeException(""));
-        return mapper.toDto(fileResource);
+        return fileResource;
     }
 }
