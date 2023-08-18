@@ -14,6 +14,13 @@ spring:
       max-file-size: 5MB
       max-request-size: 6MB
       enabled: true
+  jpa:
+    properties:
+      hibernate:
+        search:
+          default:
+            directory_provider: filesystem
+            indexBase: /lucene/indexes
 
 security:
   jwt:

@@ -34,6 +34,9 @@ dependencies {
     implementation 'org.mapstruct:mapstruct:1.5.3.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
     implementation 'org.apache.commons:commons-lang3'
+    implementation group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.29'
+    implementation "jakarta.json:jakarta.json-api:2.0.1"
+    implementation group: 'org.hibernate', name: 'hibernate-search-orm', version: '5.11.12.Final'
 }
 
 tasks.named('test') {
