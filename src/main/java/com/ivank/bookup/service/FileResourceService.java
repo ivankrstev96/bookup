@@ -11,4 +11,8 @@ public interface FileResourceService {
     FileResourceDto find(Long id);
 
     FileResource getOneOrThrowException(Long id);
+
+    void markBookInserted(Long id);
+
+    void cleanUnused();
 }

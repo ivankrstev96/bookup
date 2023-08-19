@@ -38,4 +38,7 @@ public class FileResource {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    @Column(name = "book_inserted")
+    private Boolean bookInserted;
+
 }

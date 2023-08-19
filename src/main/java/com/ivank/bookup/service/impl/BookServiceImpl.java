@@ -12,6 +12,7 @@ import com.ivank.bookup.service.BookService;
 import com.ivank.bookup.service.FileResourceService;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -53,6 +54,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional
     public BookDto insert(BookUpsertDto bookUpsertDto, User user) {
         Book book = bookMapper.upsertDtoToModel(bookUpsertDto);
         book.setCreatedBy(user);
@@ -62,6 +64,9 @@ public class BookServiceImpl implements BookService {
         book.setFileResource(fileResource);
 
         book = bookRepository.save(book);
+
+        fileResourceService.markBookInserted(fileResource.getId());
+
         eventPublisher.publishEvent(new BookWasAddedEvent(this, book));
 
         return bookMapper.toDto(book);
