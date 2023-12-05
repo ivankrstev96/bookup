@@ -48,9 +48,8 @@ public class SecurityConfiguration {
                 )
                 .and()
                 .addFilter(
-                        new JwtUsernameAndPasswordAuthenticationFilter(
-                                authenticationManager(authenticationConfiguration),
-                                jwtProperties
+                        getJwtUsernameAndPasswordAuthenticationFilter(
+                                authenticationManager(authenticationConfiguration)
                         )
                 )
                 .addFilterAfter(
@@ -82,8 +81,19 @@ public class SecurityConfiguration {
     private String[] getPublicPaths() {
         return new String[]{
                 "/api/v1/users/register",
-                "/login",
+                "/api/v1/login",
         };
+    }
+
+    private JwtUsernameAndPasswordAuthenticationFilter getJwtUsernameAndPasswordAuthenticationFilter(
+            AuthenticationManager authenticationManager
+    ) {
+        JwtUsernameAndPasswordAuthenticationFilter jwtUsernameAndPasswordAuthenticationFilter = new JwtUsernameAndPasswordAuthenticationFilter(
+                authenticationManager,
+                jwtProperties
+        );
+        jwtUsernameAndPasswordAuthenticationFilter.setFilterProcessesUrl("/api/v1/login");
+        return jwtUsernameAndPasswordAuthenticationFilter;
     }
 
 }
