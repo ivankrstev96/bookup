@@ -11,8 +11,3 @@ export const setAccessToken = (accessToken: string) => {
 export const clearAccessToken = () => {
   localStorage.removeItem(PROP_NAME_ACCESS_TOKEN);
 };
-
-export const getAuthorizationHeaderValue = (authToken: string): string => {
-  const tokenValue = (!!authToken) ? authToken : getAccessToken();
-  return `Bearer ${tokenValue}`;
-};

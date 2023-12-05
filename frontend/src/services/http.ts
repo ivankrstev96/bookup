@@ -1,5 +1,5 @@
 import axios, {InternalAxiosRequestConfig} from "axios";
-import {clearAccessToken, getAccessToken, getAuthorizationHeaderValue} from "./browserStorageServices.js";
+import {clearAccessToken, getAccessToken} from "./browserStorageServices.js";
 
 const axiosInstance = axios.create();
 
@@ -7,7 +7,7 @@ const authenticationInterceptor = (config: InternalAxiosRequestConfig): Internal
     const accessToken = getAccessToken();
 
     if (accessToken) {
-      config.headers!['Authorization'] = getAuthorizationHeaderValue(accessToken);
+      config.headers!['Authorization'] = accessToken;
     }
 
     return config;

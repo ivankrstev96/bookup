@@ -29,13 +29,10 @@ const Login = () => {
     const navigateTo = useNavigate();
 
     const handleSubmit = async ({username, password}: LoginDetails) => {
-
         try {
             await login(username, password);
-            console.log("SUCCSESS")
             navigateTo("/dashboard")
         } catch (e) {
-            console.log("FAIL", e)
         }
     }
 
