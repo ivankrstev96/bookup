@@ -110,9 +110,9 @@ const Login = () => {
                         <Link to="/register">Don't have an account? Register here.</Link>
                     </Form.Text>
                 </Form.Group>
-                <Button variant="primary" type="submit" disabled={submitting}>
+                <Button.Submit submitting={submitting}>
                     Login
-                </Button>
+                </Button.Submit>
                 <Button variant="secondary" type="button" disabled={submitting} onClick={() => navigateTo(-1)}>
                     Back
                 </Button>

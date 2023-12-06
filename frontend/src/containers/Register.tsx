@@ -135,9 +135,9 @@ const Register = () => {
                         <Link to="/login">Already registered? Login here.</Link>
                     </Form.Text>
                 </Form.Group>
-                <Button variant="primary" type="submit" disabled={submitting}>
+                <Button.Submit submitting={submitting}>
                     Register
-                </Button>
+                </Button.Submit>
                 <Button variant="secondary" type="button" disabled={submitting} onClick={() => navigateTo(-1)}>
                     Back
                 </Button>
