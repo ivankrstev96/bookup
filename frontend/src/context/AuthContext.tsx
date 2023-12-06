@@ -36,7 +36,7 @@ export const AuthContextProvider = (props: any) => {
             return Promise.resolve();
 
         } catch (e) {
-            return Promise.reject();
+            return Promise.reject(e);
         }
     };
 
