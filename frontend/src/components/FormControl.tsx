@@ -9,7 +9,8 @@ interface Props extends Omit<FormControlProps, "value" | "onChange"> {
 
 export const defaultErrorMessageMap: { [index: string]: string } = {
     REQUIRED: "This field is required!",
-    INVALID_EMAIL: "This is not a valid email!"
+    INVALID_EMAIL: "This is not a valid email!",
+    DOES_NOT_EQUAL: "This is not the correct value!"
 }
 
 const FormControl = ({fieldRenderProps, errorMessageMap = defaultErrorMessageMap, ...props}: Props) => {

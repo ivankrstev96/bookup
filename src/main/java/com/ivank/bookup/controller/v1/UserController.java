@@ -24,7 +24,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/current-user")
-    public ResponseEntity<UserDto> register(User user) {
+    public ResponseEntity<UserDto> getCurrentUser(User user) {
         UserDto userDto = this.service.getUserDetails(user);
         return ResponseEntity.ok(userDto);
     }

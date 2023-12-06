@@ -12,7 +12,6 @@ export const requiredValidator = (value: any): ValidationError | undefined | str
   }
 };
 
-
 export const emailValidator = (value: string): ValidationError | undefined => {
 
   if (value) {
@@ -22,8 +21,12 @@ export const emailValidator = (value: string): ValidationError | undefined => {
   return undefined;
 }
 
+export const equalsValidator = (valueToMatch: any) => (value: any): ValidationError | undefined => {
+  return valueToMatch === value ? undefined : "DOES_NOT_EQUAL"
+}
+
 export const anyValidator = (...validators: any) => (value: ValidationError | undefined) =>
     validators.reduce((error: ValidationError | undefined, validator: any) => error || validator(value), undefined)
 
-export type ValidationError = "REQUIRED" | "INVALID_EMAIL";
+export type ValidationError = "REQUIRED" | "INVALID_EMAIL" | "DOES_NOT_EQUAL";
 
