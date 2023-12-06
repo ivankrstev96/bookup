@@ -1,6 +1,6 @@
 package com.ivank.bookup.exception;
 
-import com.ivank.bookup.exception.dto.ErrorResponse;
+import com.ivank.bookup.exception.dto.ErrorResponseDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
             WebRequest request
     ) {
         String message = "This username is already taken! Please try something else.";
-        ErrorResponse error = new ErrorResponse(message);
+        ErrorResponseDto error = new ErrorResponseDto(message);
         return handleExceptionInternal(
                 exception,
                 error,
@@ -34,7 +34,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
             WebRequest request
     ) {
         String message = "User with given email is already registered!";
-        ErrorResponse error = new ErrorResponse(message);
+        ErrorResponseDto error = new ErrorResponseDto(message);
         return handleExceptionInternal(
                 exception,
                 error,
