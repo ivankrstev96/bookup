@@ -3,6 +3,8 @@ package com.ivank.bookup.service.impl;
 import com.ivank.bookup.dto.UserDto;
 import com.ivank.bookup.dto.UserUpsertDto;
 import com.ivank.bookup.dto.mapper.UserMapper;
+import com.ivank.bookup.exception.UserWithEmailAlreadyExistsException;
+import com.ivank.bookup.exception.UserWithUsernameAlreadyExistsException;
 import com.ivank.bookup.model.User;
 import com.ivank.bookup.model.enums.Role;
 import com.ivank.bookup.repository.UserRepository;
@@ -26,6 +28,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto register(UserUpsertDto userUpsertDto) {
+        validateRegisterMethod(userUpsertDto);
+
         User user = userMapper.upsertDtoToModel(userUpsertDto);
         user.setRole(Role.USER);
         user.setPassword(this.encoder.encode(user.getPassword()));
@@ -36,5 +40,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUserDetails(User user) {
         return userMapper.toDto(user);
+    }
+
+    public void validateRegisterMethod(UserUpsertDto userUpsertDto) {
+        if (userRepository.existsByUsernameIgnoreCase(userUpsertDto.getUsername())) {
+            throw new UserWithUsernameAlreadyExistsException();
+        }
+
+        if (userRepository.existsByEmailIgnoreCase(userUpsertDto.getEmail())) {
+            throw new UserWithEmailAlreadyExistsException();
+        }
     }
 }

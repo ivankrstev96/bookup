@@ -40,7 +40,11 @@ const Register = () => {
             await register(userUpsertDto);
             navigateTo("/login")
         } catch (error: any) {
-
+            if (error.response.status === 400 && error.response.data?.message) {
+                setError(error.response.data.message);
+            } else {
+                setError("Something went wrong!");
+            }
         }
     }
 
