@@ -1,14 +1,11 @@
 import {Alert, Card, Form} from "react-bootstrap";
-import {Backdrop} from "../components/Backdrop";
-import {CenteredContainer} from "../components/CenteredContainer";
+import {Backdrop, Button, CenteredContainer, FormControl} from "../components";
 import styled from "styled-components";
 import {useContext, useState} from "react";
 import {Link, Navigate, useNavigate} from "react-router-dom";
-import {Button} from "../components/Button";
 import {AuthContext} from "../context/AuthContext";
 import {Field, Form as FinalForm, FormRenderProps} from "react-final-form";
 import {requiredValidator} from "../utils/validatorUtils";
-import {FormControl} from "../components/FormControl";
 
 
 const StyledCard = styled(Card)`
@@ -50,7 +47,7 @@ const Login = () => {
 
         return (
             <Alert variant="danger" onClose={() => setError(undefined)} dismissible>
-                    {error}
+                {error}
             </Alert>
         );
     }
