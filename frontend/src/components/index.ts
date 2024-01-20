@@ -3,3 +3,6 @@ export * from "./Button";
 export * from "./CenteredContainer";
 export * from "./FormControl";
 export * from "./FullPageSpinner";
+export * from "./dashboard";
+export * from "./Pagination";
+export * from "./ProtectedRoute";

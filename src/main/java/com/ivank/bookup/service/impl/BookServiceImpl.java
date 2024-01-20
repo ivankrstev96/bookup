@@ -11,6 +11,8 @@ import com.ivank.bookup.repository.BookRepository;
 import com.ivank.bookup.service.BookService;
 import com.ivank.bookup.service.FileResourceService;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,6 +53,12 @@ public class BookServiceImpl implements BookService {
                 .orElseThrow(() -> new RuntimeException(""));
 
         return bookMapper.toDto(book);
+    }
+
+    @Override
+    public Page<BookDto> search(Pageable pageable) {
+        Page<Book> books = bookRepository.findAll(pageable);
+        return books.map((bookMapper::toDto));
     }
 
     @Override

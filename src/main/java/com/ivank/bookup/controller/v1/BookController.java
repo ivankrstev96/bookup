@@ -50,7 +50,13 @@ public class BookController {
             @RequestParam(defaultValue = "") String query,
             Pageable pageable
     ) {
-        Page<BookDto> resultPage = this.searchService.search(query, pageable);
+        Page<BookDto> resultPage;
+        if ("".equals(query)) {
+            resultPage = service.search(pageable);
+        } else {
+            resultPage = this.searchService.search(query, pageable);
+        }
+
         return ResponseEntity.ok(resultPage);
     }
 
