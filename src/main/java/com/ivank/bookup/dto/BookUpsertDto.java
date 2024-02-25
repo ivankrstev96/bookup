@@ -14,9 +14,16 @@ public class BookUpsertDto {
     public String name;
 
     @NotNull
+    @NotBlank
+    public String description;
+
+    @NotNull
     public BookType type;
 
     @NotNull
     public Long fileResourceId;
+
+    @NotNull
+    public Long imageId;
 
 }

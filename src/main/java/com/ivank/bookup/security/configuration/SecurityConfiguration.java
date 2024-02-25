@@ -82,6 +82,7 @@ public class SecurityConfiguration {
         return new String[]{
                 "/api/v1/users/register",
                 "/api/v1/login",
+                "/api/v1/public/**"
         };
     }
 

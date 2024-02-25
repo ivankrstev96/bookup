@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface FileResourceRepository extends JpaRepository<FileResource, Long> {
 
-    List<FileResource> findAllByBookInsertedIsFalseAndCreatedAtBefore(LocalDateTime before);
+    List<FileResource> findAllByUsedIsFalseAndCreatedAtBefore(LocalDateTime before);
 
 }

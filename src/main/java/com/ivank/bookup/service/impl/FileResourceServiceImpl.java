@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +26,7 @@ public class FileResourceServiceImpl implements FileResourceService {
     private final FileResourceMapper mapper;
 
     public FileResourceDto upload(MultipartFile file) {
-        FileResource fileResource = null;
+        FileResource fileResource;
         try {
             fileResource = FileResource
                     .builder()
@@ -34,7 +35,7 @@ public class FileResourceServiceImpl implements FileResourceService {
                     .name(file.getOriginalFilename())
                     .type(file.getContentType())
                     .createdAt(LocalDateTime.now())
-                    .bookInserted(false)
+                    .used(false)
                     .build();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -58,9 +59,14 @@ public class FileResourceServiceImpl implements FileResourceService {
     }
 
     @Override
-    public void markBookInserted(Long id) {
+    public Optional<Byte[]> serve(Long id) {
+        return this.repository.findById(id).map(FileResource::getBytes);
+    }
+
+    @Override
+    public void markUsed(Long id) {
         FileResource fileResource = getOneOrThrowException(id);
-        fileResource.setBookInserted(true);
+        fileResource.setUsed(true);
 
         repository.save(fileResource);
     }
@@ -71,7 +77,7 @@ public class FileResourceServiceImpl implements FileResourceService {
         LocalDateTime before = LocalDateTime.now();
         before = before.minusMinutes(30);
 
-        List<FileResource> fileResources = repository.findAllByBookInsertedIsFalseAndCreatedAtBefore(before);
+        List<FileResource> fileResources = repository.findAllByUsedIsFalseAndCreatedAtBefore(before);
 
         repository.deleteAll(fileResources);
 

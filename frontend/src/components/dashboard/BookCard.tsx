@@ -22,7 +22,7 @@ const BookCard = (props: Props) => {
                 <Col>
                     <h4>{book.name}</h4>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eget est lorem ipsum dolor sit amet. Neque egestas congue quisque egestas diam. Etiam tempor orci eu lobortis elementum. Aliquet bibendum enim facilisis gravida neque convallis a cras. Quis blandit turpis cursus in. Ullamcorper morbi tincidunt ornare massa. At risus viverra adipiscing at in tellus integer. Posuere ac ut consequat semper viverra nam libero. Fames ac turpis egestas sed tempus. Congue quisque egestas diam in arcu cursus euismod quis. Lacus laoreet non curabitur gravida arcu ac tortor.
+                        {book.description}
                     </p>
                 </Col>
             </Row>

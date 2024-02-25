@@ -3,7 +3,7 @@ import {FieldRenderProps} from "react-final-form";
 import {FormControlProps} from 'react-bootstrap/FormControl'
 
 interface Props extends Omit<FormControlProps, "value" | "onChange"> {
-    fieldRenderProps: FieldRenderProps<string | undefined>,
+    fieldRenderProps: FieldRenderProps<string | undefined> | Omit<FieldRenderProps<string | undefined>, "value">,
     errorMessageMap?: { [index: string]: string }
 }
 
@@ -38,8 +38,7 @@ const FormControl = ({fieldRenderProps, errorMessageMap = defaultErrorMessageMap
     return (
         <>
             <Form.Control
-                value={fieldRenderProps.input.value}
-                onChange={fieldRenderProps.input.onChange}
+                {...fieldRenderProps.input}
                 isInvalid={error !== undefined}
                 {...props}
             />

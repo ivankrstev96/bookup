@@ -25,6 +25,9 @@ public class Book {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "description")
+    private String description;
+
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private BookType type;
@@ -33,6 +36,9 @@ public class Book {
     @JoinColumn(name = "file_resource_id", referencedColumnName = "id")
     private FileResource fileResource;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_id", referencedColumnName = "id")
+    private FileResource image;
 
     @ManyToOne
     @JoinColumn(name = "created_by_user_id", referencedColumnName = "id")

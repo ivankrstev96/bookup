@@ -6,6 +6,7 @@ import {Register} from "./Register";
 import {Dashboard} from "./Dashboard";
 import {ProtectedRoute} from "../components/ProtectedRoute";
 import {SearchContextProvider} from "../context/SearchContext";
+import {UploadBook} from "./UploadBook";
 
 const Main = () => {
     const {isAuthenticated} = useContext(AuthContext);
@@ -24,6 +25,11 @@ const Main = () => {
                         <SearchContextProvider>
                             <Dashboard/>
                         </SearchContextProvider>
+                    }/>
+                }/>
+                <Route path="/upload-book" element={
+                    <ProtectedRoute container={
+                        <UploadBook/>
                     }/>
                 }/>
             </Routes>

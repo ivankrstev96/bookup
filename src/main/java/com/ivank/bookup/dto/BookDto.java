@@ -10,10 +10,14 @@ public class BookDto {
 
     public String name;
 
+    public String description;
+
     public BookType type;
 
     public FileResourceDto fileResource;
 
     public UserDto createdBy;
+
+    public FileResourceDto image;
 
 }

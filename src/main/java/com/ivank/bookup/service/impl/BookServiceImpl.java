@@ -69,11 +69,14 @@ public class BookServiceImpl implements BookService {
         book.setCreatedAt(LocalDateTime.now());
 
         FileResource fileResource = fileResourceService.getOneOrThrowException(bookUpsertDto.getFileResourceId());
+        FileResource image = fileResourceService.getOneOrThrowException(bookUpsertDto.getImageId());
         book.setFileResource(fileResource);
+        book.setImage(image);
 
         book = bookRepository.save(book);
 
-        fileResourceService.markBookInserted(fileResource.getId());
+        fileResourceService.markUsed(fileResource.getId());
+        fileResourceService.markUsed(image.getId());
 
         eventPublisher.publishEvent(new BookWasAddedEvent(this, book));
 

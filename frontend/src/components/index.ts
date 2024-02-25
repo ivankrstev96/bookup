@@ -6,3 +6,4 @@ export * from "./FullPageSpinner";
 export * from "./dashboard";
 export * from "./Pagination";
 export * from "./ProtectedRoute";
+export * from "./IconButton";
