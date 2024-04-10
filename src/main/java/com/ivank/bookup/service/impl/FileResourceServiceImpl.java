@@ -59,8 +59,8 @@ public class FileResourceServiceImpl implements FileResourceService {
     }
 
     @Override
-    public Optional<Byte[]> serve(Long id) {
-        return this.repository.findById(id).map(FileResource::getBytes);
+    public Optional<FileResource> serve(Long id) {
+        return this.repository.findById(id);
     }
 
     @Override

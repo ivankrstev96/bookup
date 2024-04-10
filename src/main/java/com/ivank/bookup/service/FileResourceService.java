@@ -14,7 +14,7 @@ public interface FileResourceService {
 
     FileResource getOneOrThrowException(Long id);
 
-    Optional<Byte[]> serve(Long id);
+    Optional<FileResource> serve(Long id);
 
     void markUsed(Long id);
 
