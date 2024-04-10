@@ -27,6 +27,7 @@ interface FormData extends UserUpsertDto {
 const Register = () => {
 
     const [error, setError] = useState<string | undefined>(undefined);
+    const [renderSuccessPage, setRenderSuccessPage] = useState<boolean>(false);
     const {isAuthenticated} = useContext(AuthContext);
     const navigateTo = useNavigate();
 
@@ -35,7 +36,7 @@ const Register = () => {
 
         try {
             await register(userUpsertDto);
-            navigateTo("/login")
+            setRenderSuccessPage(true);
         } catch (error: any) {
             if (error.response.status === 400 && error.response.data?.message) {
                 setError(error.response.data.message);
@@ -146,17 +147,40 @@ const Register = () => {
         );
     }
 
+    const renderRegister = () => {
+        return (
+            <FinalForm
+                onSubmit={(values: any) => handleSubmit(values)}
+                subscription={{values: true, pristine: true, submitting: true}}
+                render={renderForm}
+            />
+        );
+    }
+
+    const renderSuccess = () => {
+        return (
+            <>
+                <Alert variant="success">
+                    You have successfully registered an account.
+                </Alert>
+                <Button
+                    variant="success"
+                    type="button"
+                    onClick={() => navigateTo("/login")}
+                >
+                    Login
+                </Button>
+            </>
+        );
+    }
+
     const render = () => {
         return (
             <Backdrop source={"src/assets/background_book_circle.jpg"}>
                 <CenteredContainer>
                     <StyledCard body>
                         <CardTitle>Register</CardTitle>
-                        <FinalForm
-                            onSubmit={(values: any) => handleSubmit(values)}
-                            subscription={{values: true, pristine: true, submitting: true}}
-                            render={renderForm}
-                        />
+                        {renderSuccessPage ? renderSuccess() : renderRegister()}
                     </StyledCard>
                 </CenteredContainer>
             </Backdrop>

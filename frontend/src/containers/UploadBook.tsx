@@ -39,6 +39,7 @@ interface UploadProgress {
 const UploadBook = () => {
 
     const [error, setError] = useState<string | undefined>(undefined);
+    const [renderSuccessPage, setRenderSuccessPage] = useState<boolean>(false);
     const [uploadProgress, setUploadProgress] = useState<UploadProgress>({});
     const navigateTo = useNavigate();
 
@@ -47,6 +48,7 @@ const UploadBook = () => {
 
         try {
             await submitBook(bookUpsertDto);
+            setRenderSuccessPage(true);
         } catch (error: any) {
             if (error.response.status === 400 && error.response.data?.message) {
                 setError(error.response.data.message);
@@ -207,6 +209,33 @@ const UploadBook = () => {
         );
     }
 
+    const renderSuccess = ({form}: FormRenderProps) => {
+        return (
+            <Form>
+                <Alert variant="success">
+                        You have successfully uploaded a book.
+                </Alert>
+                <Button
+                    variant="success"
+                    type="button"
+                    onClick={() => {
+                        form.reset();
+                        setRenderSuccessPage(false);
+                    }}
+                >
+                    Upload another book
+                </Button>
+                <Button
+                    variant="secondary"
+                    type="button"
+                    onClick={() => navigateTo("/dashboard")}
+                >
+                    Back to dashboard
+                </Button>
+            </Form>
+        );
+    }
+
     return (
         <Backdrop source={"src/assets/background_book_circle.jpg"}>
             <CenteredContainer>
@@ -215,7 +244,7 @@ const UploadBook = () => {
                     <FinalForm
                         onSubmit={(values: any) => handleSubmit(values)}
                         subscription={{values: true, pristine: true, submitting: true}}
-                        render={renderForm}
+                        render={renderSuccessPage ? renderSuccess : renderForm}
                         initialValues={getInitialValues()}
                     />
                 </StyledCard>
