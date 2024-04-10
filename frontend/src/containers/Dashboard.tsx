@@ -1,5 +1,5 @@
 import {BookList, Pagination, SearchBox} from "../components";
-import {Col, Form, InputGroup, Row} from "react-bootstrap";
+import {Col, Container, Form, InputGroup, Row} from "react-bootstrap";
 import Spinner from "react-bootstrap/Spinner";
 import {useContext, useEffect, useState} from "react";
 import {PagingResponseData, SearchContext} from "../context/SearchContext";
@@ -72,43 +72,44 @@ const Dashboard = () => {
         }
 
         return (
-            <Row className="justify-content-md-center mt-3">
-                <Col className="col-md-auto">
-                    <Pagination
-                        page={pageableParams.page!}
-                        totalPages={pagingResponseData!.totalPages}
-                        handlePageChange={setPage}
-                        disabled={searching}
-                    />
-                </Col>
-                <Col className="col-md-auto">
-                    <InputGroup>
-                        <InputGroup.Text id="inputGroup-sizing-default">
-                            Page size
-                        </InputGroup.Text>
-                        <PageSizeFromControl
-                            type="number"
-                            value={pageableParams.size!}
-                            onChange={event => {
-                                if (!event.target.value || event.target.value === "") {
-                                    setSize(1);
-                                    return;
-                                }
-
-                                let value = parseInt(event.target.value);
-                                if (value < 1) {
-                                    value = 1;
-                                }
-                                if (value > 999) {
-                                    value = 999
-                                }
-                                setSize(value)
-                            }}
+            <Container>
+                <Row className="justify-content-md-center mt-3">
+                    <Col className="col-md-auto">
+                        <Pagination
+                            page={pageableParams.page!}
+                            totalPages={pagingResponseData!.totalPages}
+                            handlePageChange={setPage}
+                            disabled={searching}
                         />
-                    </InputGroup>
+                    </Col>
+                    <Col className="col-md-auto">
+                        <InputGroup>
+                            <InputGroup.Text id="inputGroup-sizing-default">
+                                Page size
+                            </InputGroup.Text>
+                            <PageSizeFromControl
+                                type="number"
+                                value={pageableParams.size!}
+                                onChange={event => {
+                                    if (!event.target.value || event.target.value === "") {
+                                        setSize(1);
+                                        return;
+                                    }
 
-                </Col>
-            </Row>
+                                    let value = parseInt(event.target.value);
+                                    if (value < 1) {
+                                        value = 1;
+                                    }
+                                    if (value > 999) {
+                                        value = 999
+                                    }
+                                    setSize(value)
+                                }}
+                            />
+                        </InputGroup>
+                    </Col>
+                </Row>
+            </Container>
         );
     }
 
